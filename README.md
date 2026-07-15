@@ -26,5 +26,13 @@ Already wired to a Supabase database (URL + public key baked into
 - **GitHub repo (optional):** `./deploy.sh rental-tracker` creates the repo and pushes.
 
 ## Data model (Supabase)
-- `rentals` — one row per trip: renter, start_ts, end_ts, rate_usd, note, paid.
+- `rentals` — one row per trip: renter, start_ts, end_ts, rate_usd, note, paid, created_at, expenses.
 - `rental_settings` — singleton row holding the shared default hourly rate.
+- <img width="289" height="520" alt="image" src="https://github.com/user-attachments/assets/00ac5162-8e1b-4261-ae3f-5ee2d7754d34" />
+
+## App Preview
+<img width="523" height="731" alt="image" src="https://github.com/user-attachments/assets/1205765f-54af-48fa-8eee-4bd71d8bff80" />
+
+<img width="600" height="704" alt="image" src="https://github.com/user-attachments/assets/cbd43d6e-25fc-4adc-8f53-94ba7a1fcd0c" />
+
+
