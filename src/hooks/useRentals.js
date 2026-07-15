@@ -49,9 +49,10 @@ export function useRentals() {
     ),
     startTrip: ({ renter, note }) => mutate(supabase.from('rentals').insert({
       renter: renter.trim() || 'Renter', start_ts: new Date().toISOString(),
-      end_ts: null, rate_usd: rate, note: note.trim(),
+      end_ts: null, rate_usd: rate, note: note.trim(), expenses: [],
     })),
     stopTrip: (r) => mutate(supabase.from('rentals').update({ end_ts: new Date().toISOString() }).eq('id', r.id)),
+    updateExpenses: (r, expenses) => mutate(supabase.from('rentals').update({ expenses }).eq('id', r.id)),
     togglePaid: (r) => mutate(supabase.from('rentals').update({ paid: !r.paid }).eq('id', r.id)),
     del: (id) => mutate(supabase.from('rentals').delete().eq('id', id)),
     saveEdit: (r) => mutate(supabase.from('rentals').update({
@@ -59,6 +60,7 @@ export function useRentals() {
       start_ts: new Date(r.start_ts).toISOString(),
       end_ts: r.end_ts ? new Date(r.end_ts).toISOString() : null,
       rate_usd: Number(r.rate_usd) || 0, note: r.note || '',
+      expenses: r.expenses || [],
     }).eq('id', r.id)),
   }
 

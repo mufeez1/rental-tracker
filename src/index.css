@@ -134,6 +134,7 @@ body {
 }
 .btn.small {
   padding: 14px 16px;
+  height: fit-content;
   font-size: 15px;
   background: var(--accent);
   color: #04222e;
@@ -201,6 +202,10 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  margin-bottom: 10px;
+}
+.stats.two {
+  grid-template-columns: repeat(2, 1fr);
   margin-bottom: 16px;
 }
 .stat {
@@ -284,6 +289,15 @@ body {
   align-items: flex-end;
   gap: 6px;
   flex-shrink: 0;
+}
+.r-split {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 .r-amount {
   font-size: 18px;
@@ -370,4 +384,44 @@ body {
   .sheet {
     border-radius: 20px;
   }
+}
+
+/* expenses editor */
+.expenses {
+  width: 100%;
+}
+.exp-list {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.exp-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+.exp-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.exp-item .exp-amt {
+  margin-left: auto;
+  font-weight: 600;
+}
+.exp-add {
+  display: flex;
+  gap: 8px;
+}
+.exp-add .field {
+  flex: 1;
+  min-width: 0;
+}
+.exp-add .btn {
+  flex: 0 0 auto;
 }

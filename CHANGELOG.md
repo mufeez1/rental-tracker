@@ -5,6 +5,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/); this project use
 
 ## [Unreleased]
 
+### Added
+- Per-trip expenses (Toll, Fuel, Car Wash, Parking, Tip, Water, Miscellaneous). Add them live on the running trip or later via the edit sheet. Expenses are reimbursable — they're added to the client's amount owed, and appear in the rental list, live total, and Excel export (with a Time/Expenses breakdown). Requires the `expenses` column: run `supabase/add_expenses_column.sql`.
+
 ### Changed
 - Restructured `src/` into `pages/`, `components/`, `hooks/`, and `lib/` folders — no behavior change.
 - Extracted all Supabase I/O, realtime subscriptions, and totals into a `useRentals` hook; a single `mutate()` helper replaced the error-handle-then-refetch pattern that was duplicated across every write.

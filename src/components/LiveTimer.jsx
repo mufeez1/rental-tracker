@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { money, cost, fmtDuration, hoursBetween } from '../lib/utils'
+import { money, amount, fmtDuration, hoursBetween } from '../lib/utils'
 
 /* Ticks itself every second so the page doesn't re-render on every tick. */
 export default function LiveTimer({ active }) {
@@ -11,7 +11,7 @@ export default function LiveTimer({ active }) {
   return (
     <>
       <div className="timer-clock">{fmtDuration(hoursBetween(active.start_ts))}</div>
-      <div className="timer-cost">{money(cost(active, new Date().toISOString()))}</div>
+      <div className="timer-cost">{money(amount(active, new Date().toISOString()))}</div>
     </>
   )
 }

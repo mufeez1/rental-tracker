@@ -1,4 +1,4 @@
-import { money, cost, fmtDuration, fmtDateTime, hoursBetween, toLocalInput } from '../lib/utils'
+import { money, amount, cost, expensesTotal, fmtDuration, fmtDateTime, hoursBetween, toLocalInput } from '../lib/utils'
 
 export default function RentalRow({ r, onTogglePaid, onEdit, onDelete }) {
   return (
@@ -8,9 +8,18 @@ export default function RentalRow({ r, onTogglePaid, onEdit, onDelete }) {
         <div className="r-time">{fmtDateTime(r.start_ts)} → {fmtDateTime(r.end_ts)}</div>
         {r.note && <div className="r-note">{r.note}</div>}
         <div className="r-meta">{fmtDuration(hoursBetween(r.start_ts, r.end_ts))} · {money(r.rate_usd)}/hr</div>
+        {expensesTotal(r) > 0 && (
+          <div className="r-meta">{(r.expenses || []).map((e) => e.type).join(', ')}</div>
+        )}
       </div>
       <div className="r-right">
-        <div className="r-amount">{money(cost(r))}</div>
+        {expensesTotal(r) > 0 && (
+          <div className="r-split">
+            <span>Rental {money(cost(r))}</span>
+            <span>Expenses {money(expensesTotal(r))}</span>
+          </div>
+        )}
+        <div className="r-amount">{money(amount(r))}</div>
         <button className={`chip ${r.paid ? 'paid' : 'unpaid'}`} onClick={() => onTogglePaid(r)}>
           {r.paid ? '✓ Paid' : 'Unpaid'}
         </button>

@@ -30,18 +30,28 @@ export function toLocalInput(iso) {
   return local.toISOString().slice(0, 16)
 }
 
+export const EXPENSE_TYPES = ['Toll', 'Fuel', 'Car Wash', 'Parking', 'Tip', 'Water', 'Miscellaneous']
+
+// time cost only
 export const cost = (r, endISO = r.end_ts) =>
   hoursBetween(r.start_ts, endISO) * Number(r.rate_usd || 0)
 
+export const expensesTotal = (r) =>
+  (r.expenses || []).reduce((s, e) => s + (Number(e.amount) || 0), 0)
+
+// what the client owes: time cost + reimbursable expenses
+export const amount = (r, endISO = r.end_ts) => cost(r, endISO) + expensesTotal(r)
+
 // Totals across completed trips only.
 export function totalsOf(rentals) {
-  let hrs = 0, earned = 0, paid = 0
+  let hrs = 0, earned = 0, expenses = 0, paid = 0
   for (const r of rentals) {
     if (!r.end_ts) continue
-    const c = cost(r)
+    const a = amount(r)
     hrs += hoursBetween(r.start_ts, r.end_ts)
-    earned += c
-    if (r.paid) paid += c
+    earned += a
+    expenses += expensesTotal(r)
+    if (r.paid) paid += a
   }
-  return { hrs, earned, paid, due: earned - paid }
+  return { hrs, earned, expenses, paid, due: earned - paid }
 }

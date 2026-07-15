@@ -10,7 +10,7 @@ import EditSheet from '../components/EditSheet'
 
 export default function HomePage() {
   const { rentals, completed, active, rate, totals, loading, err,
-    saveRate, startTrip, stopTrip, togglePaid, del, saveEdit } = useRentals()
+    saveRate, startTrip, stopTrip, togglePaid, del, saveEdit, updateExpenses } = useRentals()
 
   const [rateInput, setRateInput] = useState('')
   const [renter, setRenter] = useState('')
@@ -48,7 +48,8 @@ export default function HomePage() {
 
       <RateCard value={rateInput} onChange={setRateInput} onSave={onSaveRate} />
       <TripCard active={active} renter={renter} note={note}
-        onRenter={setRenter} onNote={setNote} onStart={onStart} onStop={() => stopTrip(active)} />
+        onRenter={setRenter} onNote={setNote} onStart={onStart} onStop={() => stopTrip(active)}
+        onExpenses={updateExpenses} />
       <Stats totals={totals} />
 
       <div className="list-head">

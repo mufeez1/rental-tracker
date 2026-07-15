@@ -1,3 +1,5 @@
+import ExpensesEditor from './ExpensesEditor'
+
 /* Controlled edit sheet. `row` is the working copy held by the parent. */
 export default function EditSheet({ row, onChange, onCancel, onSave }) {
   const set = (patch) => onChange({ ...row, ...patch })
@@ -15,6 +17,8 @@ export default function EditSheet({ row, onChange, onCancel, onSave }) {
         <input className="field" type="number" min="0" step="0.5" value={row.rate_usd} onChange={(e) => set({ rate_usd: e.target.value })} />
         <label className="lbl">Note</label>
         <input className="field" value={row.note || ''} onChange={(e) => set({ note: e.target.value })} />
+        <label className="lbl">Expenses</label>
+        <ExpensesEditor expenses={row.expenses} onChange={(next) => set({ expenses: next })} />
         <div className="sheet-btns">
           <button className="btn ghost" onClick={onCancel}>Cancel</button>
           <button className="btn start" onClick={onSave}>Save</button>

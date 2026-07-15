@@ -49,3 +49,6 @@ coverage/
 
 # Miscellaneous
 *.tgz
+
+supabase/
+.claude/
